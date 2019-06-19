@@ -11,6 +11,7 @@ namespace DerevoLi
     {
         private static Random rnd = new Random();
         private static List<int> fTop, sTop;
+        private static int[,] matrix;
         private static void PrintTable(int kolTop)
         {
             Color.Print(" ---------------------------------\n", ConsoleColor.Green);
@@ -67,6 +68,15 @@ namespace DerevoLi
             }
 
             return result;
+        }
+        private static void Matrix(int kolTop)
+        {
+            var edges = new List<Tuple<int, int>>();
+            for (int i = 0; i < kolTop; i++)
+            {
+                edges.Add(new Tuple<int, int>(fTop[i], sTop[i]));
+            }
+            matrix = GetIncidenceMatrix(edges);
         }
         static void Main()
         {
