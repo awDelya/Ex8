@@ -54,6 +54,20 @@ namespace DerevoLi
             }
             
         }
+        private static int[,] GetIncidenceMatrix(List<Tuple<int, int>> edges, bool oriented = false)
+        {
+            var maxEdgeNumber = edges.Select(t => Math.Max(t.Item1, t.Item2)).Max();
+            var result = new int[maxEdgeNumber, edges.Count];
+
+            for (int i = 0; i < edges.Count; i++)
+            {
+                var edge = edges[i];
+                result[edge.Item1 - 1, i] = oriented ? -1 : 1;
+                result[edge.Item2 - 1, i] = 1;
+            }
+
+            return result;
+        }
         static void Main()
         {
             Color.Print("\n Введите колличество ребер (от 2 до 9): ", ConsoleColor.Yellow);
@@ -65,7 +79,7 @@ namespace DerevoLi
                 fTop.Add(0);
                 sTop.Add(0);
             }
-            DoTable(kolTop);
+            DoTable(kolTop);            
             Text.GoBackMenu();
         }
     }
